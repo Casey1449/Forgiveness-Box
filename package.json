@@ -1,6 +1,7 @@
 {
   "name": "Forgiveness-Box",
   "version": "0.1.0",
+  "main": "server.js",
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
@@ -25,6 +26,6 @@
   },
   "engines": {
     "node": "6.2.2"
-  },
-  "proxy": "http://localhost:3001"
+  }
+
 }
