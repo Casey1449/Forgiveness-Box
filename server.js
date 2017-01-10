@@ -3,7 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
+const cors = require('express-cors');
 
+app.use(cors());
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,15 +16,14 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/urls', (request, response) => {
-  if (!app.locals.db.urls.data) {
-    return response.status(422).send({
-      error: 'No urls stored'
-    });
-  }
+app.get('/grudges', function (req, res) {
+  fs.readFile(__dirname + "/fakedata.json", "utf8", function (err, data) {
+    let grudges = JSON.parse(data);
+    console.log( JSON.stringify(grudges) );
+    res.send( JSON.stringify(grudges) );
+  });
+})
 
-  response.json(app.locals.db.urls.data);
-});
 
 if (!module.parent) {
   app.listen(app.get('port'), () => {

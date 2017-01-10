@@ -11,6 +11,9 @@ class App extends Component {
           <Link to={'/add'}>
             Add a new forgiveness goal
           </Link>
+          <Link to={'/list'}>
+            grudges
+          </Link>
         </div>
       </div>
     );

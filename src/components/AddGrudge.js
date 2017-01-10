@@ -11,6 +11,10 @@ export default class AddGrudge extends Component {
     }
   }
 
+  submitGrudge(){
+    
+  }
+
   render() {
     return (
       <div className={'add-form'}>
