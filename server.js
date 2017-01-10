@@ -2,8 +2,16 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const shortid = require('shortid');
+const mongoose = require('mongoose')
+const MongoClient = require('mongodb').MongoClient;
 const path = require('path');
 const cors = require('express-cors');
+const dbName = 'grudgeDB';
+const connectionString = 'mongodb://localhost:27017' + dbName;
+let Grudge = require('./models/grudge');
+
+mongoose.connect(connectionString);
 
 app.use(cors());
 app.use(express.static('./public'));
@@ -16,20 +24,29 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/grudges', function (req, res) {
-  fs.readFile(__dirname + "/fakedata.json", "utf8", function (err, data) {
-    let grudges = JSON.parse(data);
-    console.log( JSON.stringify(grudges) );
-    res.send( JSON.stringify(grudges) );
+app.get('/grudges', function(req, res) {
+  Grudge.find(function(err, grudges) {
+    res.send(grudges);
   });
-})
+});
 
 app.post('/grudges', function (req, res) {
-  const grudge = req.body;
-  console.log(req.header);
-  console.log(grudge);
+  let grudge = new Grudge({
+    id: shortid.generate(),
+    name: req.body.name,
+    grievance: req.body.grievance,
+    forgiveness: false,
+  })
 
-})
+  grudge.save(function(err){
+    if (err) {
+      res.send(err);
+    }
+    Grudge.find(function(err, grudges){
+      res.send(grudges);
+    });
+  });
+});
 
 
 if (!module.parent) {
