@@ -12,7 +12,16 @@ export default class AddGrudge extends Component {
   }
 
   submitGrudge(){
-    
+    // var myHeaders = new Headers();
+    //
+    // myHeaders.append('Content-Type', 'application/json');
+
+    console.log({...this.state})
+    fetch('/grudges', {
+      method: 'POST',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify({...this.state})
+    });
   }
 
   render() {
@@ -24,7 +33,8 @@ export default class AddGrudge extends Component {
         <form className='new-grudge-form'
               onSubmit={ (e) => {
                 e.preventDefault()
-                console.log('form-submitted')} }>
+                console.log('form-submitted');
+                this.submitGrudge()} }>
           <label>
             <h2>Name of forgiveness target:</h2>
             <input

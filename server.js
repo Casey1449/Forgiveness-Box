@@ -24,6 +24,13 @@ app.get('/grudges', function (req, res) {
   });
 })
 
+app.post('/grudges', function (req, res) {
+  const grudge = req.body;
+  console.log(req.header);
+  console.log(grudge);
+
+})
+
 
 if (!module.parent) {
   app.listen(app.get('port'), () => {
