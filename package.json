@@ -1,18 +1,32 @@
 {
   "name": "Forgiveness-Box",
   "version": "0.1.0",
+  "main": "server.js",
+  "homepage": "http://Casey1449.github.io/Forgiveness-Box",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.6",
+    "nodemon": "^1.11.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.0",
+    "shortid": "^2.2.6"
   },
   "devDependencies": {
     "react-scripts": "0.8.5"
-  }
+  },
+  "engines": {
+    "node": "6.2.2"
+  },
+  "proxy": "http://localhost:3001"
 }

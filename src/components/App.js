@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Link } from 'react-router';
+import '../App.css';
 
 class App extends Component {
   render() {
@@ -7,6 +8,12 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Forgiveness Box</h2>
+          <Link to={'/add'}>
+            Add a new forgiveness goal
+          </Link>
+          <Link to={'/list'}>
+            grudges
+          </Link>
         </div>
       </div>
     );
