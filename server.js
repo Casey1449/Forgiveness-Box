@@ -20,13 +20,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', process.env.PORT || 3001);
 app.locals.title = 'Forgiveness Box';
 
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'index.html'));
-// });
-
-app.get('/*', function (req, res) {
-   res.sendFile(path.join(__dirname, 'index.html'));
- });
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+//
+// app.get('/*', function (req, res) {
+//    res.sendFile(path.join(__dirname, 'index.html'));
+//  });
 
 app.get('/grudges', function(req, res) {
   Grudge.find(function(err, grudges) {
