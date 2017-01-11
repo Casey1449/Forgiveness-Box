@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import '../App.css';
 
 class List extends Component {
-  constructor(){
-    super();
-    this.state = {
-      grudges: ''
-    }
-  }
-
-  componentWillMount(){
-    fetch('/grudges')
-      .then((res) => { return res.json(); })
-      .then((response) => {
-        console.log(response);
-        this.setState({grudges: response})
-      })
-  }
+  // constructor(){
+  //   super();
+  //   this.state = {
+  //     grudges: ''
+  //   }
+  // }
+  //
+  // componentWillMount(){
+  //   fetch('/grudges')
+  //     .then((res) => { return res.json(); })
+  //     .then((response) => {
+  //       console.log(response);
+  //       this.setState({grudges: response})
+  //     })
+  // }
 
   renderListItem(grudgeObj){
     return(
-      <li key={Math.random()}>
-        <h2>{ grudgeObj.name }</h2>
-        <p>grievance: {grudgeObj.grievance}</p>
-        <p>forgiven? {grudgeObj.forgiven ?
-          <span>Yes</span> : <span>No</span>
-          } </p>
-      </li>
+      <Link to={`/${grudgeObj.id}`}
+            activeClassName="active">
+        <li key={Math.random()}>
+          <p>{ grudgeObj.name }</p>
+        </li>
+      </Link>
     )
   }
 
   render() {
 
-    const { grudges } = this.state
+    const { grudges } = this.props
 
     return (
       <div className="App">
