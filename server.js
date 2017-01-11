@@ -34,6 +34,12 @@ app.get('/grudges', function(req, res) {
   });
 });
 
+app.get('/grudges/:id', function(req, res) {
+  Grudge.find({ id: req.params.id}, function(err, thisGrudge) {
+    res.send(thisGrudge);
+  });
+});
+
 app.post('/grudges', function (req, res) {
   let grudge = new Grudge({
     id: shortid.generate(),
